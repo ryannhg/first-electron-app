@@ -3,3 +3,6 @@ node_modules
 
 # Elm things
 elm-stuff
+
+#Generated files
+main/app.js
