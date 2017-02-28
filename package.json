@@ -4,7 +4,8 @@
   "description": "my first electron app",
   "main": "main.js",
   "scripts": {
-    "start": "./node_modules/.bin/electron ."
+    "start": "./node_modules/.bin/electron .",
+    "elm": "elm-make main/src/Main.elm --output=main/app.js --debug"
   },
   "author": "",
   "license": "ISC",

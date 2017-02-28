@@ -1,31 +1,68 @@
 const {app, BrowserWindow} = require('electron')
 const path = require('path')
 const url = require('url')
+
 const isNotMac = process.platform !== 'darwin'
+const SPLASH_TIME_MS = 2000
 
-let win
+let splashWindow, mainWindow
 
-function createWindow () {
 
-	win = new BrowserWindow({ width: 800, height: 600 })
+function createSplashWindow () {
 
-	win.loadURL(url.format({
+	splashWindow = new BrowserWindow({ width: 400, height: 300, frame: false })
 
-		pathname: path.join(__dirname, 'index.html'),
+	splashWindow.loadURL(url.format({
+
+		pathname: path.join(__dirname, 'splash/index.html'),
 		protocol: 'file:',
 		slashes: true
 
 	}))
 
-	win.on('closed', () => {
+	splashWindow.on('closed', () => {
 
-		win = undefined
+		splashWindow = undefined
+
+	})
+
+	setTimeout(() => {
+
+		if( splashWindow !== undefined) {
+
+			splashWindow.close()
+
+			createMainWindow()
+
+		}
+
+	}, SPLASH_TIME_MS)
+
+}
+
+function createMainWindow () {
+
+	mainWindow = new BrowserWindow({ width: 800, height: 600 })
+
+	mainWindow.loadURL(url.format({
+
+		pathname: path.join(__dirname, 'main/index.html'),
+		protocol: 'file:',
+		slashes: true
+
+	}))
+
+	mainWindow.openDevTools()
+
+	mainWindow.on('closed', () => {
+
+		mainWindow = undefined
 
 	})
 
 }
 
-app.on('ready', createWindow)
+app.on('ready', createSplashWindow)
 
 app.on('window-all-closed', () => {
 
@@ -37,8 +74,8 @@ app.on('window-all-closed', () => {
 
 app.on('activate', () => {
 
-	if (win === undefined) {
-		createWindow()
+	if (splashWindow === undefined && mainWindow == undefined) {
+		createSplashWindow()
 	}
 
 })
