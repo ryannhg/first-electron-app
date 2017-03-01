@@ -1,25 +1,34 @@
 module Main exposing (..)
 
-import Html exposing (..)
+import Navigation exposing (Location, program)
+import Routes exposing (getPageFromLocation)
+import Model exposing (Model)
+import Msg exposing (Msg)
+import Update exposing (update)
+import View exposing (view)
+import Types exposing (Context)
+import Navbar.Update as Navbar
 
-type alias Model = 
-    { title: String
-    }
 
-type Msg = NoOp
-
-
+main : Program Never Model Msg
 main =
-  Html.beginnerProgram { model = model, view = view, update = update }
+    program Msg.UrlChange
+        { init = init
+        , view = view
+        , update = update
+        , subscriptions = (\_ -> Sub.none)
+        }
 
-model : Model
-model =
-    Model "Elmi"
 
-update : Msg -> Model -> Model
-update msg model =
-    model
-
-view : Model -> Html Msg
-view model =
-    text model.title
+init : Location -> ( Model, Cmd Msg )
+init location =
+    let
+        context =
+            Context
+                Nothing
+                (getPageFromLocation location)
+    in
+        Model
+            context
+            (Navbar.init context)
+            ! []

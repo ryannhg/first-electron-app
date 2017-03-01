@@ -2,13 +2,15 @@
 <html>
 <head>
     <meta charset="UTF-8">
-	<title>Elmi</title>
+	<title>Elmi.</title>
 	<link href="https://fonts.googleapis.com/css?family=Baloo|Lato" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="styles/reset.css">
 	<link rel="stylesheet" type="text/css" href="styles/main.css">
 </head>
 <body>
 	<div id="main"></div>
 	<script type="text/javascript" src="app.js"></script>
+	<script type="text/javascript">window.Elm = require('./app')</script>
 	<script type="text/javascript">
 	    var node = document.getElementById('main');
 	    var app = Elm.Main.embed(node);
