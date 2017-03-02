@@ -1,5 +1,7 @@
 module Types exposing (..)
 
+import Navigation exposing (Location)
+
 
 type alias Name =
     { first : String
@@ -11,9 +13,19 @@ type alias EmailAddress =
     String
 
 
+type alias Password =
+    String
+
+
 type alias User =
     { name : Name
     , email : EmailAddress
+    }
+
+
+type alias Link =
+    { label : String
+    , url : String
     }
 
 
@@ -24,5 +36,5 @@ type Page
 
 type alias Context =
     { user : Maybe User
-    , page : Page
+    , location : Location
     }

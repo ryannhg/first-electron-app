@@ -1,10 +1,6 @@
 module Navbar.Model exposing (..)
 
-
-type alias Link =
-    { label : String
-    , url : String
-    }
+import Types exposing (Link)
 
 
 type alias Model =

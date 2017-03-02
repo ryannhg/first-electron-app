@@ -1,6 +1,6 @@
 module Navbar.Msg exposing (..)
 
-import Navbar.Model exposing (Link)
+import Types exposing (Link)
 
 
 type Msg
